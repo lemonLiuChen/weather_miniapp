@@ -1,0 +1,49 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="main" wx:if="{{now}}">
+    <view>
+      <text>{{city}} {{district}} <van-icon name="location-o" /></text>
+      <text class="date_time">{{dateTime}}</text>
+    </view>
+    <view class="now_container">
+      <view class="temp">
+        <text>{{now.temp}}</text>
+        <text class="temp_unit">℃</text>
+      </view>
+      <view class="icon_viewer">
+        <view>
+          <image wx:if="{{now.icon}}" class="icon" src="https://codermoyv.gitee.io/coder-moyv/assets/images/wechat/weather_custom/{{now.icon}}.png"></image>
+          <text class="now_text">{{now.text}}</text>
+        </view>
+        <view class="temp_range" wx:if="{{daily.length > 0}}">{{daily[0].tempMin}}℃ ~ {{daily[0].tempMax}}℃</view>
+      </view>
+      <view class="now_other">
+        <van-row gutter="20">
+          <van-col span="8">{{now.windDir}} {{now.windScale}}级</van-col>
+          <van-col span="8">湿度 {{now.humidity}}%</van-col>
+          <van-col span="8">气压 {{now.pressure}}Pa</van-col>
+        </van-row>
+      </view>
+    </view>
+  </view>
+  <view class="updateTime" wx:if="{{updateTime}}">和风天气 更新于{{updateTime}}</view>
+  <view class="daily_container" wx:if="{{daily.length > 0}}">
+    <view class="sub_title">
+      <text class="sub_title_block"></text>
+      <text>3天预报</text>
+    </view>
+    <view class="daily_wrap">
+      <van-row gutter="20">
+        <van-col span="8" wx:for="{{daily}}" wx:key="index">
+          <view>{{item.date}}</view>
+          <view class="text_gray">{{item.week}}</view>
+          <image class="icon" src="https://codermoyv.gitee.io/coder-moyv/assets/images/wechat/weather_custom/{{item.iconDay}}.png"></image>
+          <view class="daily_textDay">{{item.textDay}}</view>
+          <view class="daily_range">{{item.tempMin}}℃~{{item.tempMax}}℃</view>
+          <view>{{item.windDirDay}}</view>
+				  <view class="text_gray">{{item.windScaleDay}}级</view>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+</view>
